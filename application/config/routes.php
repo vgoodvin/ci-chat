@@ -38,7 +38,6 @@
 |
 */
 
-$route['migrations'] = "migrations/index";
 $route['default_controller'] = "welcome";
 
 
