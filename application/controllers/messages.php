@@ -11,14 +11,8 @@ class Messages extends CI_Controller {
   {
     $this->load->helper('form');
     if ($this->input->cookie('ci-chat-nickname') == '') {
-      // TODO: implement new controller "users"
       $this->load->helper('url');
-      redirect('/users/login');
-      /*$this->input->set_cookie(array(
-        'name'   => 'ci-chat-nickname',
-        'value'  => 'Vasily',
-        'expire' => 86400,
-      ));*/
+      redirect('/users/login', 'location', 301);
     }
     else {
       $this->load->view('messages/index', array(
@@ -48,7 +42,7 @@ class Messages extends CI_Controller {
     else
     {
       $this->messages_model->add_message();
-      redirect('/messages/index', 'location', 301);
+      redirect('/users/login', 'location', 301);
     }
   }
 }
