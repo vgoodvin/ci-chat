@@ -1,7 +1,7 @@
 <h1>Chat</h1>
 <div id="messages">
   <?php foreach ($messages as $message): ?>
-    <div class="message">
+    <div class="message msg-id-<?php print $message['id']; ?>">
         <span class="author"><?php print $message['author']; ?></span>
         <span class="created"><?php print $message['created_at']; ?></span>
         <span class="text"><?php print $message['message']; ?></span>

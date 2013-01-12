@@ -18,6 +18,7 @@ class Migrations extends CI_Controller {
         $table->string('author', 50);
         $table->text('message');
         $table->datetime('created_at');
+        $table->key('created_at');
       });
       print "Database tables were created successfully.\n";
     }

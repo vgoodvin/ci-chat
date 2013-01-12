@@ -1,0 +1,6 @@
+#messages {
+  overflow: scroll;
+  overflow-x: visible;
+  width: 700px;
+  height: 300px;
+}

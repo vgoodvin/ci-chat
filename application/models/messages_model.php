@@ -8,7 +8,7 @@ class Messages_model extends CI_Model {
 
   public function get_latest_messages()
   {
-    return $this->db->get('messages', 1000, 0)->result_array();
+    return array_reverse($this->db->order_by('id', 'desc')->get('messages', 1000, 0)->result_array());
   }
 
   public function add_message()
