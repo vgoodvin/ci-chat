@@ -1,14 +1,36 @@
 var http = require('http');
 var sockjs = require('sockjs');
+var mysql = require('mysql');
 //var redis = require('redis');
+
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'toor',
+  database : 'cichat'
+});
+
+connection.connect();
 
 /*var redisClient = redis.createClient(6379, 'localhost');
 redisClient.subscribe('ci-chat');*/
 
 var echo = sockjs.createServer();
+var connections = [];
+
 echo.on('connection', function (conn) {
+  connections.push(conn);
   conn.on('data', function (message) {
-    conn.write('new message');
+    connection.query('SELECT * FROM messages ORDER BY id DESC LIMIT 1000', function(err, rows, fields) {
+      if (err) throw err;
+
+      var response = JSON.stringify(rows);
+      connections.forEach(function (client) {
+        client.write(response);
+      });
+    });
+
+
   });
 
   /*redisClient.on('message', function (channel, rawMsgData) {
