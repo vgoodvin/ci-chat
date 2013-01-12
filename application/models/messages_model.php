@@ -20,7 +20,14 @@ class Messages_model extends CI_Model {
       'message' => $this->input->post('msg'),
       'created_at' => $date->format('Y-m-d H:i:s'),
     );
-    // TODO: inform node.js daemon through Redis PubSub
+
+    /*$redis = new Redis();
+    $redis->pconnect('localhost', 6379);
+    $redis->publish("ci-chat", json_encode(array(
+      'type' => 'message',
+      'data' => $data,
+    )));*/
+
     return $this->db->insert('messages', $data);
   }
 }
