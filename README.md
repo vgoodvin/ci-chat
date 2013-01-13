@@ -26,4 +26,4 @@ chmod +x ./install
 node ./node-server/server.js
 ```
 
-5. Visit "http://your-host/"
+Visit "http://your-host/"
