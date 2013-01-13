@@ -1,35 +1,37 @@
 /**
  * @file chat.js
- * TODO: add description.
+ * Main chat logic.
  */
 
 $(document).ready(function() {
-  var sock = new SockJS('http://ci-chat:9999/chat');
+  var sock = new SockJS('http://localhost:9999/chat');
 
+  var $newMsgForm = $('#new-message-form');
+  var $msgContainer = $('#messages');
+
+  // Updated messages log when new messages were received.
   sock.onmessage = function(e) {
-    var $messagesContainer = $('#messages');
-    var $messages = $('<div></div>');
-    var messages = JSON.parse(e.data).reverse();
-    $.each(messages, function (index, value) {
+    var $newMessages = $('<div></div>');
+    var newMessages = JSON.parse(e.data).reverse();
+    $.each(newMessages, function (index, value) {
       if ($('.msg-id-' + value['id']).length === 0) {
-        var $message = $('<div>').addClass('message').addClass('msg-id-' + value['id']);
-        $('<span>').addClass('author').text(value['author']).appendTo($message);
-        $('<span>').addClass('created').text(value['created_at']).appendTo($message);
-        $('<span>').addClass('text').text(value['message']).appendTo($message);
-        $message.appendTo($messages);
+        var $newMessage = $('<div>').addClass('message').addClass('msg-id-' + value['id']);
+        var createdAt = $.format.date(value['created_at'], 'yyyy-MM-dd HH:mm:ss');
+        $('<div>').addClass('created').text('[' + createdAt + ']').appendTo($newMessage);
+        $('<div>').addClass('author').text(value['author']).appendTo($newMessage);
+        $('<div>').addClass('text').text(value['message']).appendTo($newMessage);
+        $newMessage.appendTo($newMessages);
       }
     });
-    $messagesContainer.append($messages.children('div')).scrollTop($messagesContainer[0].scrollHeight)
+    $msgContainer.append($newMessages.children('div')).scrollTop($msgContainer[0].scrollHeight)
   };
 
-  $('#new-message-form').ajaxForm(function () {
+  // Inform Node.js server about new messages.
+  $newMsgForm.ajaxForm(function () {
     sock.send();
+    $('.form-text', $newMsgForm).val('');
   });
 
-  /*var testInc = 0;
-  setInterval(function () {
-    $.post('http://ci-chat/index.php/messages/create', { "msg": "Test message #" + testInc++ }, function () {
-      sock.send();
-    });
-  }, 50);*/
+  // Scroll to botton on page load.
+  $msgContainer.scrollTop($msgContainer[0].scrollHeight);
 });

@@ -4,8 +4,8 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'root',
-  password : 'toor',
+  user     : 'test',
+  password : 'test',
   database : 'cichat'
 });
 
@@ -33,4 +33,4 @@ echo.on('connection', function (conn) {
 
 var server = http.createServer();
 echo.installHandlers(server, {prefix:'/chat'});
-server.listen(9999, 'ci-chat');
+server.listen(9999, 'localhost');

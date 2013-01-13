@@ -13,12 +13,10 @@ class Messages_model extends CI_Model {
 
   public function add_message()
   {
-    $timezone = new DateTimeZone('UTC');
-    $date = new DateTime('now', $timezone);
     $data = array(
       'author' => $this->input->cookie('ci-chat-nickname', TRUE),
       'message' => $this->input->post('msg'),
-      'created_at' => $date->format('Y-m-d H:i:s'),
+      'created_at' => date('Y-m-d H:i:s'),
     );
     return $this->db->insert('messages', $data);
   }

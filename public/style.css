@@ -2,5 +2,28 @@
   overflow: scroll;
   overflow-x: visible;
   width: 700px;
-  height: 300px;
+  height: 400px;
+}
+#messages .message {
+  margin-bottom: 5px;
+}
+#messages .message div {
+  margin-right: 5px;
+}
+#messages .message .created {
+  color: #8c8c8c;
+  float: left;
+  clear: left;
+}
+#messages .message .author {
+  color: #098dde;
+  font-weight: bold;
+  float: left;
+}
+
+#new-message-form {
+  margin-top: 10px;
+}
+#new-message-form .form-text {
+  width: 650px;
 }
