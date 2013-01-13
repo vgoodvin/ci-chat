@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'toor';
-$db['default']['database'] = 'cichat';
+$db['default']['username'] = 'test';
+$db['default']['password'] = 'test';
+$db['default']['database'] = 'chat';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

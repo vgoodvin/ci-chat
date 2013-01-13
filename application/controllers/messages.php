@@ -15,10 +15,12 @@ class Messages extends CI_Controller {
       redirect('/users/login', 'location', 301);
     }
     else {
+      $this->load->view('shared/header');
       $this->load->view('messages/index', array(
         'messages' => $this->messages_model->get_latest_messages(),
         'title' => 'Chat'
       ));
+      $this->load->view('shared/footer');
     }
   }
 
@@ -37,7 +39,9 @@ class Messages extends CI_Controller {
 
     if ($this->form_validation->run() === FALSE)
     {
+      $this->load->view('shared/header');
       $this->load->view('messages/index',$data);
+      $this->load->view('shared/footer');
     }
     else
     {
