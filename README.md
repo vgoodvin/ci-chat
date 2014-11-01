@@ -1,4 +1,4 @@
-# CI-chat
+# CI-Chat
 
 Simple web-chat build on Codeigniter and Node.js
 
