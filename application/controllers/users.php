@@ -26,8 +26,8 @@ class Users extends CI_Controller {
         return;
       }
     }
-    $this->load->view('shared/header');
-    $this->load->view('users/login', array('title' => 'Chat'));
+    $this->load->view('shared/header', array('title' => 'User Login'));
+    $this->load->view('users/login');
     $this->load->view('shared/footer');
   }
 
